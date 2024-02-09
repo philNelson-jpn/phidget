@@ -2,6 +2,8 @@
 import React from 'react'
 import styles from './page.module.css'
 import { range } from '../../../app/utlis'
+import { motion } from 'framer-motion'
+import useSound from 'use-sound'
 
 const boxes = [
 	{
@@ -45,7 +47,16 @@ const boxes = [
 export default function BubbleWrap() {
 	const [squares, setSquares] = React.useState(boxes)
 
-	// function + map
+	const [popUp] = useSound('sounds/happyPop.mp3', {
+		playbackRate: 0.6,
+		volume: 0.8,
+	})
+
+	const [pushPop] = useSound('sounds/multiPop.mp3', {
+		playbackRate: 0.3,
+		volume: 0.8,
+	})
+
 	function toggleBox(id) {
 		const nextSquares = squares.map((square) =>
 			square.id === id ? { ...square, on: !square.on } : square
@@ -57,7 +68,10 @@ export default function BubbleWrap() {
 		<Box
 			key={square.id}
 			on={square.on}
-			toggleBox={() => toggleBox(square.id)}
+			toggleBox={() => {
+				toggleBox(square.id)
+				square.on ? pushPop() : popUp()
+			}}
 		/>
 	))
 
@@ -71,6 +85,7 @@ export function Box({ on, toggleBox }) {
 			'inset -1px -1px 2px hsla(0, 0%, 0%, 0.16), inset 0px 2px 3px hsla(0, 0%, 100%, 1), inset -1px -4px 6px  hsla(0, 0%, 0%, .12)',
 		filter:
 			'drop-shadow(2px 5px 2px hsla(0, 0%, 0%, 0.3)) drop-shadow(0px 4px 16px hsla(0, 0%, 0%, 0.1))',
+		scale: '1.05',
 	}
 	const offStyles = {
 		background: 'linear-gradient(#E6E6E6, #F3F3F3)',
@@ -78,15 +93,27 @@ export function Box({ on, toggleBox }) {
 			'inset 1px 1px 2px hsla(0, 0%, 100%, 0.9), inset 1px 1px 6px  hsla(0, 0%, 0%, .6), inset 2px 4px 8px  hsla(0, 0%, 0%, .2)',
 		filter:
 			'drop-shadow(0px 0px 0px hsla(0, 0%, 0%, 0)) drop-shadow(0px 0px 0px hsla(0, 0%, 0%, 0))',
+		scale: '1',
 	}
 	const boxStyles = {
 		background: on ? `${onStyles.background}` : `${offStyles.background}`,
 		filter: on ? `${onStyles.filter}` : `${offStyles.filter}`,
 		boxShadow: on ? `${onStyles.boxShadow}` : `${offStyles.boxShadow}`,
+		scale: on ? `${onStyles.scale}` : `${offStyles.scale}`,
 	}
 
 	return (
-		<div style={boxStyles} className={styles.cell} onClick={toggleBox}></div>
+		<motion.div
+			animate={{
+				filter: boxStyles.filter,
+				scale: boxStyles.scale,
+				boxShadow: boxStyles.boxShadow,
+			}}
+			transition={{ type: 'spring', stiffness: 150 }}
+			style={boxStyles}
+			className={styles.cell}
+			onClick={toggleBox}
+		></motion.div>
 	)
 }
 
