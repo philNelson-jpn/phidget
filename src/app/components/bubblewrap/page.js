@@ -42,18 +42,82 @@ const boxes = [
 		id: 9,
 		on: true,
 	},
+	{
+		id: 10,
+		on: true,
+	},
+	{
+		id: 11,
+		on: true,
+	},
+	{
+		id: 12,
+		on: true,
+	},
+	{
+		id: 13,
+		on: true,
+	},
+	{
+		id: 15,
+		on: true,
+	},
+	{
+		id: 16,
+		on: true,
+	},
+	{
+		id: 17,
+		on: true,
+	},
+	{
+		id: 18,
+		on: true,
+	},
+	{
+		id: 19,
+		on: true,
+	},
+	{
+		id: 20,
+		on: true,
+	},
+	{
+		id: 21,
+		on: true,
+	},
+	{
+		id: 22,
+		on: true,
+	},
+	{
+		id: 23,
+		on: true,
+	},
+	{
+		id: 24,
+		on: true,
+	},
+	{
+		id: 25,
+		on: true,
+	},
+	{
+		id: 26,
+		on: true,
+	},
 ]
 
 export default function BubbleWrap() {
 	const [squares, setSquares] = React.useState(boxes)
 
 	const [popUp] = useSound('sounds/happyPop.mp3', {
-		playbackRate: 0.6,
+		playbackRate: 0.7,
 		volume: 0.8,
 	})
 
 	const [pushPop] = useSound('sounds/multiPop.mp3', {
-		playbackRate: 0.3,
+		playbackRate: 0.5,
 		volume: 0.8,
 	})
 
@@ -109,7 +173,7 @@ export function Box({ on, toggleBox }) {
 				scale: boxStyles.scale,
 				boxShadow: boxStyles.boxShadow,
 			}}
-			transition={{ type: 'spring', stiffness: 150 }}
+			transition={{ type: 'spring', stiffness: 550, damping: 20 }}
 			style={boxStyles}
 			className={styles.cell}
 			onClick={toggleBox}
