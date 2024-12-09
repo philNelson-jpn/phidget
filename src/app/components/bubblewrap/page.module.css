@@ -1,7 +1,7 @@
 .grid {
 	--spacing: 8px;
 	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	grid-template-columns: repeat(4, 1fr);
 	gap: var(--spacing);
 	padding: 16px;
 	background: linear-gradient(hwb(0 92% 8%), hsl(0, 0%, 98%));

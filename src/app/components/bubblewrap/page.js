@@ -70,42 +70,6 @@ const boxes = [
 		id: 17,
 		on: true,
 	},
-	{
-		id: 18,
-		on: true,
-	},
-	{
-		id: 19,
-		on: true,
-	},
-	{
-		id: 20,
-		on: true,
-	},
-	{
-		id: 21,
-		on: true,
-	},
-	{
-		id: 22,
-		on: true,
-	},
-	{
-		id: 23,
-		on: true,
-	},
-	{
-		id: 24,
-		on: true,
-	},
-	{
-		id: 25,
-		on: true,
-	},
-	{
-		id: 26,
-		on: true,
-	},
 ]
 
 export default function BubbleWrap() {
@@ -139,7 +103,11 @@ export default function BubbleWrap() {
 		/>
 	))
 
-	return <div className={styles.grid}>{squareElements}</div>
+	return (
+		<>
+			<div className={styles.grid}>{squareElements}</div>
+		</>
+	)
 }
 
 export function Box({ on, toggleBox }) {
@@ -173,7 +141,7 @@ export function Box({ on, toggleBox }) {
 				scale: boxStyles.scale,
 				boxShadow: boxStyles.boxShadow,
 			}}
-			transition={{ type: 'spring', stiffness: 550, damping: 20 }}
+			transition={{ type: 'spring', stiffness: 250, damping: 10 }}
 			style={boxStyles}
 			className={styles.cell}
 			onClick={toggleBox}
@@ -181,9 +149,9 @@ export function Box({ on, toggleBox }) {
 	)
 }
 
-// export default function BubbleWrap() {
-// 	const [numRows, setNumRows] = React.useState(8)
-// 	const [numCols, setNumCols] = React.useState(8)
+// export function BubbleWrapButtons() {
+// 	const [numRows, setNumRows] = React.useState(3)
+// 	const [numCols, setNumCols] = React.useState(3)
 
 // 	const id = React.useId()
 // 	const [isOn, setIsOn] = React.useState(false)
@@ -218,7 +186,7 @@ export function Box({ on, toggleBox }) {
 // 										display: 'grid',
 // 										placeItems: 'center',
 // 										fontSize: '1.25rem',
-// 										color: 'black'
+// 										color: 'black',
 // 									}}
 // 									key={colId}
 // 									className={styles.cell}
